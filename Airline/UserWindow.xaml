@@ -1,0 +1,34 @@
+﻿<Window x:Class="Airline.UserWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:Airline"
+        mc:Ignorable="d"
+        Title="AMONIC Airlines Automation System" Height="450" Width="800" ResizeMode="NoResize" Closing="Window_Closing">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="0.25*"/>
+            <RowDefinition Height="0.5*"/>
+            <RowDefinition Height="0.5*"/>
+            <RowDefinition Height="0.5*"/>
+            <RowDefinition/>
+            <RowDefinition/>
+            <RowDefinition/>
+        </Grid.RowDefinitions>
+        <DockPanel>
+            <Menu DockPanel.Dock="Top">
+                <MenuItem x:Name="exit_menu_item" Header="_Exit" Click="exit_menu_item_Click"/>
+            </Menu>
+        </DockPanel>
+        <Label x:Name="hello_label" Content="Label" HorizontalAlignment="Left" VerticalAlignment="Center" Grid.Row="1"/>
+        <Label x:Name="spent_time_label" Content="Label" HorizontalAlignment="Left" VerticalAlignment="Center" Grid.Row="2"/>
+        <Label x:Name="crsahes_label" Content="Label" HorizontalAlignment="Left" VerticalAlignment="Center" Grid.Row="3"/>
+        <DataGrid x:Name="dataGrid" d:ItemsSource="{d:SampleData ItemCount=5}" Grid.Row="4" Grid.RowSpan="3">
+            <DataGrid.Columns>
+                <DataGridTextColumn></DataGridTextColumn>
+            </DataGrid.Columns>
+        </DataGrid>
+
+    </Grid>
+</Window>
