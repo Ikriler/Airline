@@ -59,6 +59,45 @@ namespace Airline.Models
 
             sessionsTableAdapter.UpdateSession(date, login_time, logout_time, spent_time, reason, user_id, original_id);
         }
+
+        public static string getAmountSpentTime(DataSet.UsersRow user)
+        {
+            DataSet.SessionsDataTable sessionsRows = initSessionDataTable();
+
+            List<DataSet.SessionsRow> sessionsList = sessionsRows.Where(s => s.user_id.Equals(user.ID)).ToList();
+
+            TimeSpan amountTime = new TimeSpan(0, 0, 0);
+
+            foreach(DataSet.SessionsRow session in sessionsList)
+            {
+                if(session.spent_time != "")
+                {
+                    TimeSpan time = TimeSpan.Parse(session.spent_time);
+                    amountTime = amountTime.Add(time);
+                }
+            }
+
+            return amountTime.ToString();
+        }
+
+        public static int getCountCrashes(DataSet.UsersRow user)
+        {
+            DataSet.SessionsDataTable sessionsRows = initSessionDataTable();
+
+            List<DataSet.SessionsRow> sessionsList = sessionsRows.Where(s => s.user_id.Equals(user.ID)).ToList();
+
+            int countCrashes = 0;
+
+            foreach (DataSet.SessionsRow session in sessionsList)
+            {
+                if (session.reason != "")
+                {
+                    countCrashes++;
+                }
+            }
+
+            return countCrashes;
+        }
     }
 
 }

@@ -23,10 +23,24 @@
         </DockPanel>
         <Label x:Name="hello_label" Content="Label" HorizontalAlignment="Left" VerticalAlignment="Center" Grid.Row="1"/>
         <Label x:Name="spent_time_label" Content="Label" HorizontalAlignment="Left" VerticalAlignment="Center" Grid.Row="2"/>
-        <Label x:Name="crsahes_label" Content="Label" HorizontalAlignment="Left" VerticalAlignment="Center" Grid.Row="3"/>
-        <DataGrid x:Name="dataGrid" d:ItemsSource="{d:SampleData ItemCount=5}" Grid.Row="4" Grid.RowSpan="3">
+        <Label x:Name="crashes_label" Content="Label" HorizontalAlignment="Left" VerticalAlignment="Center" Grid.Row="3"/>
+        <DataGrid x:Name="dataGrid" d:ItemsSource="{d:SampleData ItemCount=5}" Grid.Row="4" Grid.RowSpan="3" AutoGenerateColumns="False" CanUserAddRows="False" CanUserDeleteRows="False">
+            <DataGrid.RowStyle>
+                <Style TargetType="DataGridRow">
+                    <Setter Property="Background" Value="Red"></Setter>
+                    <Style.Triggers>
+                        <DataTrigger Binding="{Binding Path=reason}" Value="">
+                            <Setter Property="Background" Value="White"></Setter>
+                        </DataTrigger>
+                    </Style.Triggers>
+                </Style>
+            </DataGrid.RowStyle>
             <DataGrid.Columns>
-                <DataGridTextColumn></DataGridTextColumn>
+                <DataGridTextColumn Header="Date" Binding="{Binding Path=date}"></DataGridTextColumn>
+                <DataGridTextColumn Header="Login time" Binding="{Binding Path=login_time}"></DataGridTextColumn>
+                <DataGridTextColumn Header="Logout time" Binding="{Binding Path=logout_time}"></DataGridTextColumn>
+                <DataGridTextColumn Header="Time spent on system" Binding="{Binding Path=spent_time}"></DataGridTextColumn>
+                <DataGridTextColumn Header="Unsuccessful logout reason" Binding="{Binding Path=reason}"></DataGridTextColumn>
             </DataGrid.Columns>
         </DataGrid>
 

@@ -24,11 +24,31 @@ namespace Airline
             InitializeComponent();
             this.user = user;
             dataGrid.ItemsSource = Session.getSessionsForUser(user);
+            initHelloMessage();
+            initSpentTimeMessage();
+            initNumberCrashesMessage();
+        }
+
+        private void initHelloMessage()
+        {
+            String message = "Hi " + user.FirstName + ", Welcome to AMONIC Airlines.";
+            hello_label.Content = message;
+        }
+
+        private void initSpentTimeMessage()
+        {
+            String message = "Time spent on system: " + Session.getAmountSpentTime(user);
+            spent_time_label.Content = message;
+        }
+
+        private void initNumberCrashesMessage()
+        {
+            String message = "Number of crashes: " + Session.getCountCrashes(user);
+            crashes_label.Content = message;
         }
 
         private void exit_menu_item_Click(object sender, RoutedEventArgs e)
         {
-            closeEvent();
             Login loginWindow = new Login();
             loginWindow.WindowStartupLocation = WindowStartupLocation.CenterScreen;
             loginWindow.Show();
@@ -37,7 +57,7 @@ namespace Airline
 
         private void Window_Closing(object sender, System.ComponentModel.CancelEventArgs e)
         {
-            //closeEvent();
+            closeEvent();
         }
 
         private void closeEvent()
