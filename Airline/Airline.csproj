@@ -72,6 +72,8 @@
     <Compile Include="LogoutReasonWindow.xaml.cs">
       <DependentUpon>LogoutReasonWindow.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Models\Office.cs" />
+    <Compile Include="Models\Role.cs" />
     <Compile Include="Models\Session.cs" />
     <Compile Include="Models\User.cs" />
     <Compile Include="UserWindow.xaml.cs">

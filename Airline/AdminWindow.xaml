@@ -5,8 +5,57 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Airline"
         mc:Ignorable="d"
-        Title="AdminWindow" Height="450" Width="800">
+        Title="AdminWindow" Height="450" Width="800" Closing="Window_Closing">
     <Grid>
-        
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="0.1*"/>
+            <ColumnDefinition Width="0.5*"/>
+            <ColumnDefinition/>
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="0.15*"/>
+            <RowDefinition Height="0.25*"/>
+            <RowDefinition/>
+            <RowDefinition Height="0.25*"/>
+        </Grid.RowDefinitions>
+
+        <DockPanel Grid.ColumnSpan="3">
+            <Menu DockPanel.Dock="Top">
+                <MenuItem x:Name="add_user_menu_item" Header="_Add user" Click="add_user_menu_item_Click"/>
+                <MenuItem x:Name="exit_menu_item" Header="_Exit" Click="exit_menu_item_Click"/>
+            </Menu>
+        </DockPanel>
+
+        <Label Content="Office: " Grid.Row="1" VerticalAlignment="Center" HorizontalAlignment="Right"></Label>
+
+        <ComboBox x:Name="officesCombo" SelectedIndex="0" Grid.Row="1" Grid.Column="1" Margin="20" SelectionChanged="officesCombo_SelectionChanged"></ComboBox>
+
+        <DataGrid x:Name="dataGrid" Grid.Row="2" Grid.ColumnSpan="3" d:ItemsSource="{d:SampleData ItemCount=5}" CanUserAddRows="False" AutoGenerateColumns="False" IsReadOnly="True" SelectionMode="Single">
+            <DataGrid.RowStyle>
+                <Style TargetType="DataGridRow">
+                    <Style.Triggers>
+                        <DataTrigger Binding="{Binding Path=role}" Value="Administrator">
+                            <Setter Property="Background" Value="LightGreen"/>
+                        </DataTrigger>
+                        <DataTrigger Binding="{Binding Path=active}" Value="False">
+                            <Setter Property="Background" Value="Red"/>
+                        </DataTrigger>
+                    </Style.Triggers>
+                </Style>
+            </DataGrid.RowStyle>
+            <DataGrid.Columns>
+                <DataGridTextColumn Visibility="Hidden" Binding="{Binding Path=id}"></DataGridTextColumn>
+                <DataGridTextColumn Visibility="Hidden" Binding="{Binding Path=active}"></DataGridTextColumn>
+                <DataGridTextColumn Header="Name" Binding="{Binding Path=firstName}"/>
+                <DataGridTextColumn Header="Last Name" Binding="{Binding Path=lastName}"/>
+                <DataGridTextColumn Header="Age" Binding="{Binding Path=age}"/>
+                <DataGridTextColumn Header="User Role" Binding="{Binding Path=role}"/>
+                <DataGridTextColumn Header="Email Address" Binding="{Binding Path=email}"/>
+                <DataGridTextColumn Header="Office" Binding="{Binding Path=office}"/>
+            </DataGrid.Columns>
+        </DataGrid>
+
+        <Button x:Name="change_role" Content="Change Role" Grid.Column="0" Grid.Row="3" Margin="20" Width="100" HorizontalAlignment="Left" Grid.ColumnSpan="2" Click="change_role_Click"></Button>
+        <Button x:Name="change_login_status" Content="Enable/Disable Login" Grid.Column="1" Grid.Row="3" Margin="20" Width="140" HorizontalAlignment="Right" Click="change_login_status_Click"></Button>
     </Grid>
 </Window>

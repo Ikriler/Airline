@@ -11,17 +11,102 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
+using Airline.DataSetTableAdapters;
+using Airline.Models;
 
 namespace Airline
 {
-    /// <summary>
-    /// Логика взаимодействия для AdminWindow.xaml
-    /// </summary>
     public partial class AdminWindow : Window
     {
-        public AdminWindow()
+        private DataSet.UsersRow user;
+
+        public AdminWindow(DataSet.UsersRow user)
         {
             InitializeComponent();
+            this.user = user;
+            initOfficesCombo();
+            initUsersDataGrid();
+        }
+
+        private void initOfficesCombo()
+        {
+            officesCombo.ItemsSource = Office.getOfficesForCombo();
+        }
+
+        private void initUsersDataGrid(string office = "")
+        {
+            List<User> users =  new List<User>();
+            if (office == "" || office == "All offices")
+            {
+                users = User.convertUsersRowToUserList(User.initUsersDataTable().ToList());
+            }
+            else
+            {
+                users = User.convertUsersRowToUserList(User.initUsersDataTable().ToList()).Where(u => u.office.Equals(office)).ToList();
+            }
+            dataGrid.ItemsSource = users;
+        }
+
+        private void exit_menu_item_Click(object sender, RoutedEventArgs e)
+        {
+            Login loginWindow = new Login();
+            loginWindow.WindowStartupLocation = WindowStartupLocation.CenterScreen;
+            loginWindow.Show();
+            this.Close();
+        }
+
+        private void Window_Closing(object sender, System.ComponentModel.CancelEventArgs e)
+        {
+            closeEvent();
+        }
+
+        private void closeEvent()
+        {
+            DataSet.SessionsRow lastSession = Session.getLastSession(user);
+            DateTime date = DateTime.Now;
+            TimeSpan logout_time = new TimeSpan(hours: date.Hour, minutes: date.Minute, seconds: date.Second);
+            TimeSpan login_time = TimeSpan.Parse(lastSession.login_time);
+            String spent_time = logout_time.Subtract(login_time).ToString();
+            Session.updateSession(lastSession.date, lastSession.login_time, logout_time.ToString(), spent_time, lastSession.reason, user.ID, lastSession.id);
+        }
+
+        private void add_user_menu_item_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void change_role_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void officesCombo_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            updateDataGrid();
+        }
+
+        private void updateDataGrid()
+        {
+            if (officesCombo.SelectedItem != null)
+            {
+                initUsersDataGrid(officesCombo.SelectedItem as string);
+            }
+        }
+
+        private void change_login_status_Click(object sender, RoutedEventArgs e)
+        {
+            if(dataGrid.SelectedItem != null)
+            {
+                User selectedUser = dataGrid.SelectedItem as User;
+
+                User.changeUserActiveStatus(!selectedUser.active, selectedUser.id);
+
+                updateDataGrid();
+            }
+            else
+            {
+                MessageBox.Show("Please select user");
+            }
         }
     }
 }

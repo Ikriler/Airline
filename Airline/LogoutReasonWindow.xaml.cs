@@ -18,38 +18,23 @@ namespace Airline
     public partial class LogoutReasonWindow : Window
     {
         private DataSet.UsersRow user;
-        private bool isLogout;
+
         private DataSet.SessionsRow lastSession;
 
-        public LogoutReasonWindow()
+        public LogoutReasonWindow(DataSet.UsersRow user)
         {
             InitializeComponent();
-            initUser();
-            isLogout = Properties.Settings.Default.IsLogout;
+            this.user = user;
             setMessage();
-            relocate();
-        }
-
-        public void initUser()
-        {
-            String login = Properties.Settings.Default.Login; 
-            if(login != null && login != "")
-            {
-                user = User.getUserByLogin(login);
-            }
         }
 
         public void relocate()
         {
-            if(user != null && isLogout)
+            bool checkIsLogout = Session.getLogoutStatus(user);
+            if(checkIsLogout)
             {
+                Session.startSessionInit(user);
                 User.login(user);
-                this.Close();
-            }
-            else if (user == null) {
-                Login loginWindow = new Login();
-                loginWindow.WindowStartupLocation = WindowStartupLocation.CenterScreen;
-                loginWindow.Show();
                 this.Close();
             }
         }
@@ -81,6 +66,11 @@ namespace Airline
                 User.login(user);
                 this.Close();
             }
+        }
+
+        private void Window_Loaded(object sender, RoutedEventArgs e)
+        {
+            relocate();
         }
     }
 }

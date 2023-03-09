@@ -21,8 +21,8 @@ namespace Airline
         public Login()
         {
             InitializeComponent();
-            username_textbox.Text = "k.omar@amonic.com";
-            password_textbox.Text = "Abu dhabi";
+            username_textbox.Text = "admi@mail.ru";
+            password_textbox.Text = "1";
         }
 
         private void login_button_Click(object sender, RoutedEventArgs e)
@@ -40,10 +40,12 @@ namespace Airline
 
                 DataSet.UsersRow user = userDataRows.Where(u => u.Email.Equals(userName) && u.Password.Equals(password) && u.Active.Equals(true)).FirstOrDefault();
 
-                if (user != null)
+                if (user != null && user.Active)
                 {
-                    Session.startSessionInit(user);
-                    User.login(user);
+
+                    LogoutReasonWindow logoutReasonWindow = new LogoutReasonWindow(user);
+                    logoutReasonWindow.WindowStartupLocation = WindowStartupLocation.CenterScreen;
+                    logoutReasonWindow.Show();
                     this.Close();
                 }
                 else

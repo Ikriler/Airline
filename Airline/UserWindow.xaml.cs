@@ -68,9 +68,6 @@ namespace Airline
             TimeSpan login_time = TimeSpan.Parse(lastSession.login_time);
             String spent_time = logout_time.Subtract(login_time).ToString();
             Session.updateSession(lastSession.date, lastSession.login_time, logout_time.ToString(), spent_time, lastSession.reason, user.ID, lastSession.id);
-            Properties.Settings.Default.IsLogout = true;
-            Properties.Settings.Default.Login = "";
-            Properties.Settings.Default.Save();
         }
     }
 }

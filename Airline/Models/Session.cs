@@ -98,6 +98,20 @@ namespace Airline.Models
 
             return countCrashes;
         }
+
+        public static bool getLogoutStatus(DataSet.UsersRow user)
+        {
+            DataSet.SessionsRow session =  getLastSession(user);
+
+            if (session.logout_time != "")
+            {
+                return true;
+            }
+            else
+            {
+                return false;
+            }
+        }
     }
 
 }

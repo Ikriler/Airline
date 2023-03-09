@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Airline"
         mc:Ignorable="d"
-        Title="AMONIC Airlines Automation System" Height="450" Width="800" ResizeMode="NoResize" Closing="Window_Closing">
+        Title="AMONIC Airlines Automation System" Height="450" Width="800" Closing="Window_Closing">
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="0.25*"/>
@@ -24,7 +24,7 @@
         <Label x:Name="hello_label" Content="Label" HorizontalAlignment="Left" VerticalAlignment="Center" Grid.Row="1"/>
         <Label x:Name="spent_time_label" Content="Label" HorizontalAlignment="Left" VerticalAlignment="Center" Grid.Row="2"/>
         <Label x:Name="crashes_label" Content="Label" HorizontalAlignment="Left" VerticalAlignment="Center" Grid.Row="3"/>
-        <DataGrid x:Name="dataGrid" d:ItemsSource="{d:SampleData ItemCount=5}" Grid.Row="4" Grid.RowSpan="3" AutoGenerateColumns="False" CanUserAddRows="False" CanUserDeleteRows="False">
+        <DataGrid x:Name="dataGrid" d:ItemsSource="{d:SampleData ItemCount=5}" Grid.Row="4" Grid.RowSpan="3" AutoGenerateColumns="False" CanUserAddRows="False" CanUserDeleteRows="False" IsReadOnly="True">
             <DataGrid.RowStyle>
                 <Style TargetType="DataGridRow">
                     <Setter Property="Background" Value="Red"></Setter>
