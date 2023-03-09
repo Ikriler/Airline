@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Airline"
         mc:Ignorable="d"
-        Title="AdminWindow" Height="450" Width="800" Closing="Window_Closing">
+        Title="AdminWindow" Height="450" Width="800" Closing="Window_Closing" IsEnabledChanged="Window_IsEnabledChanged">
     <Grid>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="0.1*"/>

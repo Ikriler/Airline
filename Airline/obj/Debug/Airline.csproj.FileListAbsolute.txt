@@ -20,3 +20,7 @@ D:\Projects\Airline\Airline\obj\Debug\Login.baml
 D:\Projects\Airline\Airline\obj\Debug\UserWindow.baml
 D:\Projects\Airline\Airline\obj\Debug\LogoutReasonWindow.g.cs
 D:\Projects\Airline\Airline\obj\Debug\LogoutReasonWindow.baml
+D:\Projects\Airline\Airline\obj\Debug\AddUserWindow.g.cs
+D:\Projects\Airline\Airline\obj\Debug\ChangeRoleWindow.g.cs
+D:\Projects\Airline\Airline\obj\Debug\AddUserWindow.baml
+D:\Projects\Airline\Airline\obj\Debug\ChangeRoleWindow.baml

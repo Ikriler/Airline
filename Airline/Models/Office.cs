@@ -40,5 +40,24 @@ namespace Airline.Models
 
             return officesList;
         }
+
+        public static List<String> getClearOfficesForCombo()
+        {
+            List<String> officesList = new List<String>();
+
+            officesList = initOfficesDataTable().Select(o => o.Title).ToList();
+
+            return officesList;
+        }
+
+        public static DataSet.OfficesRow getOfficeByName(string officeName)
+        {
+            return initOfficesDataTable().Where(o => o.Title.Equals(officeName)).First();
+        }
+
+        public static DataSet.OfficesRow getOfficeById(int id)
+        {
+            return initOfficesDataTable().Where(o => o.ID.Equals(id)).First();
+        }
     }
 }

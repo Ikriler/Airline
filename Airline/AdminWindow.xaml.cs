@@ -20,6 +20,8 @@ namespace Airline
     {
         private DataSet.UsersRow user;
 
+        private Window modalWindow;
+
         public AdminWindow(DataSet.UsersRow user)
         {
             InitializeComponent();
@@ -58,6 +60,7 @@ namespace Airline
         private void Window_Closing(object sender, System.ComponentModel.CancelEventArgs e)
         {
             closeEvent();
+            if (modalWindow != null) modalWindow.Close();
         }
 
         private void closeEvent()
@@ -72,12 +75,27 @@ namespace Airline
 
         private void add_user_menu_item_Click(object sender, RoutedEventArgs e)
         {
-
+            AddUserWindow addUserWindow = new AddUserWindow(this);
+            addUserWindow.WindowStartupLocation = WindowStartupLocation.CenterScreen;
+            modalWindow = addUserWindow;
+            addUserWindow.Show();
         }
 
         private void change_role_Click(object sender, RoutedEventArgs e)
         {
+            if (dataGrid.SelectedItem != null)
+            {
+                User selectedUser = dataGrid.SelectedItem as User;
 
+                ChangeRoleWindow changeRoleWindow = new ChangeRoleWindow(this, User.getUserById(selectedUser.id));
+                changeRoleWindow.WindowStartupLocation = WindowStartupLocation.CenterScreen;
+                modalWindow = changeRoleWindow;
+                changeRoleWindow.Show();
+            }
+            else
+            {
+                MessageBox.Show("Please select user");
+            }
         }
 
         private void officesCombo_SelectionChanged(object sender, SelectionChangedEventArgs e)
@@ -107,6 +125,11 @@ namespace Airline
             {
                 MessageBox.Show("Please select user");
             }
+        }
+
+        private void Window_IsEnabledChanged(object sender, DependencyPropertyChangedEventArgs e)
+        {
+            updateDataGrid();
         }
     }
 }

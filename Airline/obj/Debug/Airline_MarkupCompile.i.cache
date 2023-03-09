@@ -10,11 +10,11 @@ none
 false
 DEBUG;TRACE
 D:\Projects\Airline\Airline\App.xaml
-4-1931797931
+6-1837054671
 
-15-1543961933
+1743729159
 13-1310406943
-AdminWindow.xaml;Login.xaml;LogoutReasonWindow.xaml;UserWindow.xaml;
+AddUserWindow.xaml;AdminWindow.xaml;ChangeRoleWindow.xaml;Login.xaml;LogoutReasonWindow.xaml;UserWindow.xaml;
 
 True
 

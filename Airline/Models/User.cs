@@ -101,11 +101,44 @@ namespace Airline.Models
             }
         }
 
+        public static DataSet.UsersRow getUserById(int id)
+        {
+            return initUsersDataTable().Where(u => u.ID.Equals(id)).First();
+        }
+
         public static void changeUserActiveStatus(bool isActive, int user_id)
         {
             UsersTableAdapter tableAdapterForUsers = new UsersTableAdapter();
 
             tableAdapterForUsers.UpdateActive(isActive, user_id);
+        }
+
+        public static void insertUser(int role_id, string email, string password, string firstName, string lastName, int office_id, DateTime birthdate, bool active = true)
+        {
+            UsersTableAdapter tableAdapterForUsers = new UsersTableAdapter();
+
+            tableAdapterForUsers.InsertUser(role_id, email, password, firstName, lastName, office_id, birthdate, active);
+        }
+
+        public static void updateUser(int role_id, string email, string firstName, string lastName, int office_id, int original_id)
+        {
+            UsersTableAdapter tableAdapterForUsers = new UsersTableAdapter();
+
+            tableAdapterForUsers.UpdateUser(role_id, email, firstName, lastName, office_id, original_id);
+        }
+
+        public static bool checkEmailExists(string email, int user_id = 0)
+        {
+            DataSet.UsersRow dbUser = initUsersDataTable().Where(u => u.Email.Equals(email) && !u.ID.Equals(user_id)).FirstOrDefault();
+
+            if(dbUser != null)
+            {
+                return true;
+            }
+            else
+            {
+                return false;
+            }
         }
 
     }

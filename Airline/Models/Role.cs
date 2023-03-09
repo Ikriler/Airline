@@ -28,5 +28,14 @@ namespace Airline.Models
 
             return role;
         }
+
+        public static DataSet.RolesRow getRoleByName(string name)
+        {
+            DataSet.RolesDataTable rolesRows = initRolesDataTable();
+
+            DataSet.RolesRow role = rolesRows.Where(r => r.Title.Equals(name)).First();
+
+            return role;
+        }
     }
 }
